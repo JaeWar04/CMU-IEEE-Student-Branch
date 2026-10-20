@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IEEE Student Branch | Caribbean Maritime University (CMU)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#040B16',
+              900: '#071426',
+              800: '#0C213B',
+              700: '#133155'
+            },
+            ieee: {
+              blue: '#00629B',
+              cyan: '#00B5E2',
+              gold: '#F59E0B'
+            },
+            cmu: {
+              maroon: '#8B1E24',
+              navy: '#06234B'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #040B16;
+      color: #F8FAFC;
+      background-image:
+        radial-gradient(circle at 12% 15%, rgba(0, 181, 226, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 25%, rgba(139, 30, 36, 0.16), transparent 40%),
+        linear-gradient(to bottom, #040B16, #071426);
+    }
+    .blueprint-grid {
+      background-size: 36px 36px;
+      background-image:
+        linear-gradient(to right, rgba(0, 181, 226, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 181, 226, 0.06) 1px, transparent 1px);
+    }
+    .glass-card {
+      background: rgba(12, 33, 59, 0.78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 181, 226, 0.22);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 181, 226, 0.42);
+    }
+    @keyframes dashFlow {
+      to {
+        stroke-dashoffset: -48;
+      }
+    }
+    .current-flow-line {
+      stroke-dasharray: 8 8;
+      animation: dashFlow var(--flow-duration, 1.2s) linear infinite;
+    }
+    @keyframes pulseRing {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 181, 226, 0.6); }
+      50% { box-shadow: 0 0 0 8px rgba(0, 181, 226, 0); }
+    }
+    .highlight-focus {
+      animation: pulseRing 1.2s ease-in-out 2;
+    }
+  </style>
+</head>
+<body class="min-h-screen blueprint-grid selection:bg-ieee-cyan selection:text-navy-950">
+
+  <!-- ===================================================================== -->
+  <!-- INLINE MASTER SVG SYMBOL FOR CARIBBEAN MARITIME UNIVERSITY CREST LOGO -->
+  <!-- Directly embedded so it ALWAYS displays with zero white background    -->
+  <!-- ===================================================================== -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="cmu-crest-svg" viewBox="0 0 300 270">
+      <defs>
+        <!-- Text path for CARIBBEAN MARITIME UNIVERSITY -->
+        <path id="cmuTextArc" d="M 74,142 A 76,76 0 1,1 226,142" />
+        <!-- Subtle inner pearl backing so the navy Caribbean islands & coral pop -->
+        <radialGradient id="innerMapGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#F8FAFC" stop-opacity="0.96" />
+          <stop offset="85%" stop-color="#E2E8F0" stop-opacity="0.92" />
+          <stop offset="100%" stop-color="#CBD5E1" stop-opacity="0.85" />
+        </radialGradient>
+      </defs>
+
+      <!-- 5 Ship's Wheel Handles/Spokes (Navy with crisp light rim for dark mode visibility) -->
+      <g fill="#06234B" stroke="#E2E8F0" stroke-width="2">
+        <!-- Top Spoke (0 deg) -->
+        <g>
+          <rect x="145" y="16" width="10" height="32" rx="3" />
+          <ellipse cx="150" cy="18" rx="8" ry="14" />
+        </g>
+        <!-- Top-Left Spoke (-48 deg around center 150,130) -->
+        <g transform="rotate(-48 150 130)">
+          <rect x="145" y="16" width="10" height="32" rx="3" />
+          <ellipse cx="150" cy="18" rx="8" ry="14" />
+        </g>
+        <!-- Top-Right Spoke (+48 deg around center 150,130) -->
+        <g transform="rotate(48 150 130)">
+          <rect x="145" y="16" width="10" height="32" rx="3" />
+          <ellipse cx="150" cy="18" rx="8" ry="14" />
+        </g>
+        <!-- Left Horizontal Spoke (-92 deg around center 150,130) -->
+        <g transform="rotate(-92 150 130)">
+          <rect x="145" y="16" width="10" height="32" rx="3" />
+          <ellipse cx="150" cy="18" rx="8" ry="14" />
+        </g>
+        <!-- Right Horizontal Spoke (+92 deg around center 150,130) -->
+        <g transform="rotate(92 150 130)">
+          <rect x="145" y="16" width="10" height="32" rx="3" />
+          <ellipse cx="150" cy="18" rx="8" ry="14" />
+        </g>
+      </g>
+
+      <!-- Outer Maroon Border Ring -->
+      <circle cx="150" cy="130" r="92" fill="none" stroke="#8B1E24" stroke-width="6" />
+
+      <!-- Main Navy Blue Wheel Ring -->
+      <circle cx="150" cy="130" r="79" fill="none" stroke="#06234B" stroke-width="21" />
+
+      <!-- Inner Globe Circle (Pearl ocean backing inside the ring so islands & coral are crystal clear) -->
+      <circle cx="150" cy="130" r="68" fill="url(#innerMapGlow)" />
+
+      <!-- Inner Maroon Twisted Rope Ring -->
+      <circle cx="150" cy="130" r="65" fill="none" stroke="#8B1E24" stroke-width="4" stroke-dasharray="5 3.5" />
+
+      <!-- Arched White Text: CARIBBEAN MARITIME UNIVERSITY -->
+      <text fill="#FFFFFF" font-family="Georgia, 'Times New Roman', serif" font-size="12.4" font-weight="bold" letter-spacing="1.5">
+        <textPath href="#cmuTextArc" startOffset="50%" text-anchor="middle">
+          CARIBBEAN MARITIME UNIVERSITY
+        </textPath>
+      </text>
+
+      <!-- Stylized Navy Blue Caribbean Archipelago Map inside Center -->
+      <g fill="#06234B">
+        <!-- Cuba -->
+        <path d="M96 105 Q118 96 146 108 Q155 112 148 116 Q125 110 96 109 Z" />
+        <!-- Jamaica -->
+        <ellipse cx="132" cy="124" rx="9.5" ry="4" />
+        <!-- Hispaniola -->
+        <path d="M158 113 Q174 109 186 116 Q180 124 160 120 Z" />
+        <!-- Puerto Rico & Lesser Antilles -->
+        <ellipse cx="196" cy="121" rx="6" ry="2.8" />
+        <circle cx="205" cy="126" r="2" />
+        <circle cx="208" cy="132" r="2" />
+        <circle cx="209" cy="138" r="2" />
+        <!-- Bahamas dots -->
+        <circle cx="148" cy="96" r="2" />
+        <circle cx="156" cy="101" r="2" />
+      </g>
+
+      <!-- Maroon Coral Branches Flanking the Anchor -->
+      <path d="M112 168 C107 156, 102 148, 107 138 C111 146, 116 140, 119 133 C121 142, 127 146, 123 162 Z" fill="#8B1E24" />
+      <path d="M188 168 C193 156, 198 148, 193 138 C189 146, 184 140, 181 133 C179 142, 173 146, 177 162 Z" fill="#8B1E24" />
+
+      <!-- Left & Right Leaping Dolphins -->
+      <g fill="#06234B" stroke="#FFFFFF" stroke-width="1.5">
+        <!-- Left Dolphin -->
+        <path d="M22 196 Q50 172 86 190 Q64 192 42 204 Q30 206 22 196 Z" />
+        <!-- Right Dolphin -->
+        <path d="M278 196 Q250 172 214 190 Q236 192 258 204 Q270 206 278 196 Z" />
+      </g>
+
+      <!-- Central Maritime Anchor (Top Ring, Stock, Shaft, and Bottom Flukes) -->
+      <g stroke="#06234B" stroke-width="3.5" fill="#FFFFFF">
+        <circle cx="150" cy="142" r="9" fill="#FFFFFF" stroke="#06234B" stroke-width="4" />
+        <rect x="125" y="159" width="50" height="7" rx="3.5" fill="#FFFFFF" />
+        <rect x="145.5" y="151" width="9" height="94" rx="2" fill="#FFFFFF" />
+        <!-- Anchor Flukes at Bottom -->
+        <path d="M108 216 Q150 262 192 216 L184 205 Q150 242 116 205 Z" fill="#06234B" stroke="#FFFFFF" stroke-width="2" />
+      </g>
+
+      <!-- Maroon Ribbon Banner with "CMU" -->
+      <path d="M26 226 Q60 198 92 218 L86 184 Q150 158 214 184 L208 218 Q240 198 274 226 L260 246 Q230 222 202 225 L196 208 Q150 188 104 208 L98 225 Q70 222 40 246 Z" fill="#8B1E24" stroke="#FFFFFF" stroke-width="1.5" />
+      <text x="150" y="202" text-anchor="middle" fill="#FFFFFF" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="29" letter-spacing="4">CMU</text>
+    </symbol>
+  </svg>
+
+  <!-- Sticky Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-navy-950/95 backdrop-blur-xl border-b border-ieee-cyan/25">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+      <!-- Brand + Inline Transparent CMU Crest -->
+      <a href="#top" class="flex items-center gap-3 group">
+        <div class="w-14 h-14 flex items-center justify-center shrink-0">
+          <img class="custom-logo-img hidden w-full h-full object-contain drop-shadow" alt="CMU Logo" />
+          <svg class="default-logo-svg w-full h-full drop-shadow"><use href="#cmu-crest-svg"></use></svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-widest bg-ieee-blue/40 text-ieee-cyan border border-ieee-cyan/30 rounded">IEEE Region 9 • Jamaica</span>
+            <span class="hidden sm:inline-block text-[11px] font-mono text-amber-400">CaribCon 2026</span>
+          </div>
+          <h1 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-ieee-cyan transition">
+            CMU IEEE Student Branch
+          </h1>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden xl:flex items-center gap-4 text-xs font-mono uppercase tracking-wider text-slate-300">
+        <a href="#about" class="hover:text-ieee-cyan transition">About</a>
+        <a href="#caribcon" class="hover:text-ieee-cyan transition">CaribCon 26</a>
+        <a href="#ohms-law" class="hover:text-ieee-cyan transition">Ohm's Law</a>
+        <a href="#register" class="hover:text-ieee-cyan transition">Register/Login</a>
+        <a href="#members" class="hover:text-ieee-cyan transition">Members</a>
+        <a href="#projects" class="px-2 py-1 rounded bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 transition">Achievements</a>
+        <a href="#events" class="px-2 py-1 rounded bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 transition">Events</a>
+        <a href="#community" class="px-2 py-1 rounded bg-ieee-blue/30 text-ieee-cyan hover:bg-ieee-blue/50 transition">Community</a>
+        <a href="#gallery" class="px-2 py-1 rounded bg-purple-500/15 text-purple-300 hover:bg-purple-500/25 transition">Gallery</a>
+      </nav>
+
+      <!-- Actions: Optional PNG Upload & Auth Status -->
+      <div class="flex items-center gap-2">
+        <label for="logoUploadInput" title="Optional: Select your local CMU PNG file to strip its white background" class="cursor-pointer px-2.5 py-1.5 rounded-lg text-xs font-mono bg-navy-800 hover:bg-navy-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-image text-ieee-cyan"></i>
+          <span class="hidden md:inline">Upload Logo PNG</span>
+          <input id="logoUploadInput" type="file" accept="image/*" class="hidden" onchange="handleLogoUpload(event)" />
+        </label>
+
+        <div id="navAuthStatus">
+          <button onclick="openLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-ieee-blue to-ieee-cyan text-navy-950 hover:opacity-95 transition flex items-center gap-1.5 shadow-lg shadow-ieee-cyan/20">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <span>IEEE Login</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="top" class="relative py-12 lg:py-16 overflow-hidden border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-ieee-blue/20 border border-ieee-cyan/30 text-ieee-cyan text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>CARIBBEAN MARITIME UNIVERSITY • PALISADOES PARK, KINGSTON, JAMAICA</span>
+          </div>
+
+          <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+            Caribbean Maritime University <span class="text-transparent bg-clip-text bg-gradient-to-r from-ieee-cyan via-sky-300 to-amber-300">IEEE Student Branch</span>
+          </h2>
+
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+            Empowering student engineers in the Faculty of Engineering and Applied Technology (FEAT) through hands-on mechatronics, embedded IoT telemetry, marine power electronics, IEEE CaribCon 2026 participation, and peer-to-peer innovation.
+          </p>
+
+          <!-- Quick Jump Pills to Interactive Add-Info Sections -->
+          <div class="pt-1">
+            <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Quick Jump to Interactive Workspaces:</div>
+            <div class="flex flex-wrap gap-2.5">
+              <a href="#ohms-law" class="px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-ieee-cyan text-navy-950 hover:bg-sky-300 transition flex items-center gap-2">
+                <i class="fa-solid fa-bolt"></i> Ohm's Law Calculator
+              </a>
+              <a href="#register" class="px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-navy-800 hover:bg-navy-700 text-white border border-ieee-cyan/30 transition flex items-center gap-2">
+                <i class="fa-solid fa-user-plus text-ieee-cyan"></i> Register &amp; Save Login
+              </a>
+              <a href="#projects" class="px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-navy-800 hover:bg-navy-700 text-amber-300 border border-amber-400/30 transition flex items-center gap-2">
+                <i class="fa-solid fa-trophy"></i> + Add Achievements
+              </a>
+              <a href="#events" class="px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-navy-800 hover:bg-navy-700 text-emerald-300 border border-emerald-400/30 transition flex items-center gap-2">
+                <i class="fa-solid fa-calendar-plus"></i> + Add Events
+              </a>
+              <a href="#community" class="px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-navy-800 hover:bg-navy-700 text-sky-300 border border-sky-400/30 transition flex items-center gap-2">
+                <i class="fa-solid fa-comments"></i> + Community Lounge
+              </a>
+              <a href="#gallery" class="px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-navy-800 hover:bg-navy-700 text-purple-300 border border-purple-400/30 transition flex items-center gap-2">
+                <i class="fa-solid fa-camera"></i> + Add Photos
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right: Large Transparent CMU Crest Showcase Card -->
+        <div class="lg:col-span-5">
+          <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+            <div class="flex flex-col items-center text-center space-y-4">
+              <!-- Large Visible Transparent CMU Logo -->
+              <div class="w-48 h-44 flex items-center justify-center">
+                <img class="custom-logo-img hidden w-full h-full object-contain drop-shadow-xl" alt="CMU Crest Logo" />
+                <svg class="default-logo-svg w-full h-full drop-shadow-xl"><use href="#cmu-crest-svg"></use></svg>
+              </div>
+              <div class="space-y-1">
+                <span class="text-xs font-mono uppercase tracking-widest text-ieee-cyan">Official Student Branch Portal</span>
+                <h3 class="font-display text-xl font-bold text-white">Caribbean Maritime University</h3>
+                <p class="text-xs text-slate-400">Faculty of Engineering and Applied Technology (FEAT)</p>
+              </div>
+              <div class="w-full grid grid-cols-4 gap-2 pt-3 border-t border-slate-700/70 text-center">
+                <div class="p-2 rounded-xl bg-navy-900/90">
+                  <div class="font-mono text-base font-bold text-ieee-cyan" id="statActiveMembers">0</div>
+                  <div class="text-[10px] text-slate-400">Members</div>
+                </div>
+                <div class="p-2 rounded-xl bg-navy-900/90">
+                  <div class="font-mono text-base font-bold text-amber-400" id="statProjectsCount">0</div>
+                  <div class="text-[10px] text-slate-400">Achievements</div>
+                </div>
+                <div class="p-2 rounded-xl bg-navy-900/90">
+                  <div class="font-mono text-base font-bold text-emerald-400" id="statEventsCount">0</div>
+                  <div class="text-[10px] text-slate-400">Events</div>
+                </div>
+                <div class="p-2 rounded-xl bg-navy-900/90">
+                  <div class="font-mono text-base font-bold text-purple-400" id="statGalleryCount">0</div>
+                  <div class="text-[10px] text-slate-400">Photos</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 01. ABOUT THE STUDENT BRANCH                                          -->
+  <!-- ===================================================================== -->
+  <section id="about" class="py-14 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="max-w-3xl space-y-2">
+        <span class="text-xs font-mono uppercase tracking-widest text-ieee-cyan">01 • Branch Identity &amp; Technical Focus</span>
+        <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">About the CMU IEEE Student Branch</h2>
+        <p class="text-slate-300 leading-relaxed">
+          Based at Caribbean Maritime University on the Palisadoes Peninsula in Kingston, Jamaica, our IEEE Student Branch connects aspiring engineers across mechatronics, marine electrical power, industrial automation, and computer science to solve real-world Caribbean challenges.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-11 h-11 rounded-xl bg-ieee-blue/30 border border-ieee-cyan/40 flex items-center justify-center text-ieee-cyan text-lg">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white">Mechatronics &amp; Robotics</h3>
+          <p class="text-sm text-slate-300">Hands-on microcontroller labs, PCB prototyping, sensor fusion, and closed-loop electromechanical design.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-11 h-11 rounded-xl bg-ieee-blue/30 border border-ieee-cyan/40 flex items-center justify-center text-ieee-cyan text-lg">
+            <i class="fa-solid fa-satellite-dish"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white">Smart IoT Telemetry</h3>
+          <p class="text-sm text-slate-300">Building low-power wireless sensor nodes and cloud dashboards for water catchment and environmental resilience.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-11 h-11 rounded-xl bg-ieee-blue/30 border border-ieee-cyan/40 flex items-center justify-center text-ieee-cyan text-lg">
+            <i class="fa-solid fa-ship"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white">Marine &amp; Hybrid Power</h3>
+          <p class="text-sm text-slate-300">Advancing AC/DC hybrid emergency hardware, renewable microgrids, and maritime electrical systems.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-11 h-11 rounded-xl bg-ieee-blue/30 border border-ieee-cyan/40 flex items-center justify-center text-ieee-cyan text-lg">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white">Edge AI &amp; Vision</h3>
+          <p class="text-sm text-slate-300">Developing Python and browser-based computer vision applications for interactive demos and precision agriculture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 02. PARTICIPATION IN IEEE CARIBCON 2026                               -->
+  <!-- ===================================================================== -->
+  <section id="caribcon" class="py-14 border-b border-slate-800/80 bg-navy-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="space-y-2 max-w-3xl">
+          <span class="px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest bg-amber-500/20 text-amber-300 border border-amber-400/30">
+            02 • Regional Flagship Conference Spotlight
+          </span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">
+            Participation in <span class="text-amber-400">IEEE CaribCon 2026</span>
+          </h2>
+          <p class="text-slate-300">
+            The Caribbean Maritime University IEEE Student Branch proudly participated in <strong>IEEE CaribCon 2026</strong> in Kingston, Jamaica—serving as student volunteers, technical session delegates, hardware demonstrators, and IEEE Region 9 collaborators.
+          </p>
+        </div>
+        <div class="glass-card px-4 py-3 rounded-xl border border-amber-400/30 text-xs font-mono text-amber-300 shrink-0">
+          <i class="fa-solid fa-location-dot mr-1.5"></i> Kingston, Jamaica • IEEE Region 9
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-ieee-cyan space-y-2">
+          <div class="text-xs font-mono text-ieee-cyan">01 • CONFERENCE OPERATIONS</div>
+          <h3 class="font-display font-bold text-lg text-white">Student Volunteer Corps</h3>
+          <p class="text-sm text-slate-300">Supported conference registration, technical session moderation, and speaker logistics across IEEE CaribCon 2026.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-400 space-y-2">
+          <div class="text-xs font-mono text-amber-400">02 • HARDWARE &amp; AI DEMOS</div>
+          <h3 class="font-display font-bold text-lg text-white">Student Prototype Showcase</h3>
+          <p class="text-sm text-slate-300">Presented CMU student engineering concepts in smart water management, hybrid AC/DC resilience, and computer vision.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-emerald-400 space-y-2">
+          <div class="text-xs font-mono text-emerald-400">03 • IEEE REGION 9 NETWORK</div>
+          <h3 class="font-display font-bold text-lg text-white">Cross-Branch Synergy</h3>
+          <p class="text-sm text-slate-300">Forged partnerships with fellow Caribbean and Latin American IEEE student branches and Jamaica Section leaders.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-purple-400 space-y-2">
+          <div class="text-xs font-mono text-purple-400">04 • CAMPUS IMPACT</div>
+          <h3 class="font-display font-bold text-lg text-white">Technical Knowledge Transfer</h3>
+          <p class="text-sm text-slate-300">Brought CaribCon 2026 research insights back to CMU FEAT laboratories for peer workshops and competition prep.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 03. INTERACTIVE OHM'S LAW CALCULATOR & LIVE CIRCUIT SIMULATOR         -->
+  <!-- ===================================================================== -->
+  <section id="ohms-law" class="py-14 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="max-w-3xl space-y-2">
+        <span class="text-xs font-mono uppercase tracking-widest text-ieee-cyan">03 • Interactive Engineering Tool</span>
+        <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">Ohm's Law Calculator &amp; Live Circuit Twin</h2>
+        <p class="text-slate-300">
+          Enter <strong>any two</strong> of Voltage (<span class="font-mono text-ieee-cyan">V</span>), Current (<span class="font-mono text-amber-400">I</span>), or Resistance (<span class="font-mono text-emerald-400">R</span>) and leave the third blank to automatically solve for the missing value and electrical Power (<span class="font-mono text-rose-400">P</span>).
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Left: Calculator Inputs -->
+        <div class="lg:col-span-6 glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700/80 pb-4">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Two-Variable Solver (<span class="font-mono text-ieee-cyan">V = I × R</span>)</h3>
+              <p class="text-xs text-slate-400">Fill any 2 fields and leave 1 blank</p>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" onclick="loadOhmPreset(12, 0.5, null)" class="px-2.5 py-1 rounded text-xs font-mono bg-navy-800 hover:bg-navy-700 text-ieee-cyan border border-ieee-cyan/30">12V &amp; 0.5A</button>
+              <button type="button" onclick="loadOhmPreset(5, null, 220)" class="px-2.5 py-1 rounded text-xs font-mono bg-navy-800 hover:bg-navy-700 text-amber-300 border border-amber-400/30">5V &amp; 220Ω</button>
+              <button type="button" onclick="clearOhmInputs()" class="px-2.5 py-1 rounded text-xs font-mono bg-rose-950/60 hover:bg-rose-900/70 text-rose-300 border border-rose-500/30">Clear All</button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Voltage -->
+            <div class="p-4 rounded-xl bg-navy-900/90 border border-slate-700/80">
+              <div class="flex justify-between items-center mb-1">
+                <label for="ohmV" class="text-xs font-mono uppercase text-ieee-cyan font-semibold">Voltage (V)</label>
+                <button type="button" onclick="document.getElementById('ohmV').value='';" class="text-[11px] font-mono text-slate-400 hover:text-white">Clear to Solve V</button>
+              </div>
+              <div class="flex gap-2">
+                <input id="ohmV" type="number" step="any" placeholder="Enter Voltage or leave blank to solve" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-ieee-cyan" />
+                <select id="unitV" class="bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-ieee-cyan">
+                  <option value="0.001">mV</option>
+                  <option value="1" selected>V</option>
+                  <option value="1000">kV</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Current -->
+            <div class="p-4 rounded-xl bg-navy-900/90 border border-slate-700/80">
+              <div class="flex justify-between items-center mb-1">
+                <label for="ohmI" class="text-xs font-mono uppercase text-amber-400 font-semibold">Current (I)</label>
+                <button type="button" onclick="document.getElementById('ohmI').value='';" class="text-[11px] font-mono text-slate-400 hover:text-white">Clear to Solve I</button>
+              </div>
+              <div class="flex gap-2">
+                <input id="ohmI" type="number" step="any" placeholder="Enter Current or leave blank to solve" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+                <select id="unitI" class="bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-amber-400">
+                  <option value="0.001">mA</option>
+                  <option value="1" selected>A</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Resistance -->
+            <div class="p-4 rounded-xl bg-navy-900/90 border border-slate-700/80">
+              <div class="flex justify-between items-center mb-1">
+                <label for="ohmR" class="text-xs font-mono uppercase text-emerald-400 font-semibold">Resistance (R)</label>
+                <button type="button" onclick="document.getElementById('ohmR').value='';" class="text-[11px] font-mono text-slate-400 hover:text-white">Clear to Solve R</button>
+              </div>
+              <div class="flex gap-2">
+                <input id="ohmR" type="number" step="any" placeholder="Enter Resistance or leave blank to solve" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-emerald-400" />
+                <select id="unitR" class="bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-emerald-400">
+                  <option value="1" selected>Ω</option>
+                  <option value="1000">kΩ</option>
+                  <option value="1000000">MΩ</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="ohmAlert" class="hidden p-3.5 rounded-xl text-xs font-mono border"></div>
+
+          <button type="button" onclick="calculateOhmsLaw()" class="w-full py-3.5 rounded-xl font-display font-bold text-navy-950 bg-gradient-to-r from-ieee-cyan via-sky-300 to-amber-300 hover:opacity-95 transition shadow-lg shadow-ieee-cyan/20 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-calculator"></i>
+            <span>Calculate Missing Value</span>
+          </button>
+
+          <div class="p-4 rounded-xl bg-navy-950/90 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>SOLVED OUTPUT &amp; POWER</span>
+              <span id="ohmSolvedBadge" class="px-2 py-0.5 rounded bg-ieee-blue/30 text-ieee-cyan">Ready</span>
+            </div>
+            <div id="ohmFormulaReadout" class="font-mono text-xs sm:text-sm text-white">
+              Enter any two values above to compute the third.
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-800 text-center">
+              <div class="p-2 rounded bg-navy-900">
+                <div class="text-[10px] font-mono text-slate-400">VOLTAGE (V)</div>
+                <div id="outV" class="font-mono text-sm font-bold text-ieee-cyan">—</div>
+              </div>
+              <div class="p-2 rounded bg-navy-900">
+                <div class="text-[10px] font-mono text-slate-400">CURRENT (I)</div>
+                <div id="outI" class="font-mono text-sm font-bold text-amber-400">—</div>
+              </div>
+              <div class="p-2 rounded bg-navy-900">
+                <div class="text-[10px] font-mono text-slate-400">RESISTANCE (R)</div>
+                <div id="outR" class="font-mono text-sm font-bold text-emerald-400">—</div>
+              </div>
+              <div class="p-2 rounded bg-navy-900">
+                <div class="text-[10px] font-mono text-slate-400">POWER (P)</div>
+                <div id="outP" class="font-mono text-sm font-bold text-rose-400">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Animated Circuit Schematic -->
+        <div class="lg:col-span-6 glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Interactive Digital Circuit Schematic</h3>
+              <p class="text-xs text-slate-400">Visualizes current speed and load power dissipation in real time</p>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">Live Loop</span>
+          </div>
+
+          <div class="bg-navy-950 rounded-xl p-4 border border-slate-800">
+            <svg viewBox="0 0 500 230" class="w-full h-auto">
+              <rect x="60" y="40" width="380" height="150" rx="14" fill="none" stroke="#1E293B" stroke-width="6" />
+              <rect id="svgCurrentLoop" x="60" y="40" width="380" height="150" rx="14" fill="none" stroke="#00B5E2" stroke-width="3.5" class="current-flow-line" style="--flow-duration: 1.2s;" />
+              <g transform="translate(60, 115)">
+                <circle cx="0" cy="0" r="26" fill="#071426" stroke="#00B5E2" stroke-width="2.5" />
+                <line x1="-10" y1="-6" x2="10" y2="-6" stroke="#00B5E2" stroke-width="3" />
+                <line x1="-5" y1="6" x2="5" y2="6" stroke="#00B5E2" stroke-width="3" />
+                <text x="0" y="-34" text-anchor="middle" fill="#00B5E2" font-family="JetBrains Mono" font-size="11" id="svgLabelV">12.0 V</text>
+              </g>
+              <g transform="translate(250, 40)">
+                <rect x="-48" y="-14" width="96" height="28" rx="6" fill="#D9B382" stroke="#78350F" stroke-width="2" />
+                <rect x="-32" y="-14" width="8" height="28" fill="#92400E" />
+                <rect x="-14" y="-14" width="8" height="28" fill="#EF4444" />
+                <rect x="4" y="-14" width="8" height="28" fill="#000000" />
+                <rect x="26" y="-14" width="6" height="28" fill="#F59E0B" />
+                <text x="0" y="-22" text-anchor="middle" fill="#34D399" font-family="JetBrains Mono" font-size="11" id="svgLabelR">24.0 Ω</text>
+              </g>
+              <g transform="translate(440, 115)">
+                <circle id="svgLampGlow" cx="0" cy="0" r="32" fill="#F59E0B" fill-opacity="0.25" />
+                <circle cx="0" cy="0" r="22" fill="#071426" stroke="#F59E0B" stroke-width="2.5" />
+                <path d="M-8 6 L0 -8 L8 6" fill="none" stroke="#FDE68A" stroke-width="2.5" />
+                <text x="0" y="38" text-anchor="middle" fill="#FB7185" font-family="JetBrains Mono" font-size="11" id="svgLabelP">6.0 W</text>
+              </g>
+              <g transform="translate(250, 190)">
+                <rect x="-56" y="-15" width="112" height="30" rx="8" fill="#071426" stroke="#F59E0B" stroke-width="2" />
+                <text x="0" y="4" text-anchor="middle" fill="#FBBF24" font-family="JetBrains Mono" font-size="11" id="svgLabelI">I = 0.500 A</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-3 text-center">
+            <button type="button" onclick="document.getElementById('ohmV').value=''; calculateOhmsLaw();" class="p-3 rounded-xl bg-ieee-blue/25 hover:bg-ieee-blue/40 border border-ieee-cyan/40 font-mono text-xs font-bold text-ieee-cyan">
+              Solve Voltage (V = I × R)
+            </button>
+            <button type="button" onclick="document.getElementById('ohmI').value=''; calculateOhmsLaw();" class="p-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 font-mono text-xs font-bold text-amber-300">
+              Solve Current (I = V / R)
+            </button>
+            <button type="button" onclick="document.getElementById('ohmR').value=''; calculateOhmsLaw();" class="p-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 font-mono text-xs font-bold text-emerald-300">
+              Solve Resistance (R = V / I)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 04. STUDENT REGISTRATION & SAVED LOGIN HUB                            -->
+  <!-- ===================================================================== -->
+  <section id="register" class="py-14 border-b border-slate-800/80 bg-navy-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="max-w-3xl space-y-2">
+        <span class="text-xs font-mono uppercase tracking-widest text-ieee-cyan">04 • Member Authentication &amp; Saved Credentials</span>
+        <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">IEEE Student Registration &amp; Saved Login</h2>
+        <p class="text-slate-300">
+          Register your CMU IEEE Student Branch account using your <strong>IEEE Member Number</strong> and save your login credentials for future visits. Registered members automatically appear in the <strong>Active IEEE Members Directory</strong> below.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Left: Registration Form -->
+        <form id="memberRegistrationForm" onsubmit="handleMemberRegistration(event)" class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
+            <h3 class="font-display font-bold text-lg text-white">Register New IEEE Student Member</h3>
+            <span class="px-2.5 py-1 rounded text-xs font-mono bg-ieee-blue/30 text-ieee-cyan border border-ieee-cyan/30">Saves to Browser</span>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Student Full Name *</label>
+              <input id="regName" type="text" required placeholder="Enter your full name" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan" />
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">IEEE Member Number *</label>
+              <input id="regIeeeNum" type="text" required placeholder="e.g. 99842100" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-mono text-ieee-cyan focus:outline-none focus:border-ieee-cyan" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Password / PIN *</label>
+              <input id="regPin" type="password" required placeholder="Create password/PIN" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-ieee-cyan" />
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Engineering Program *</label>
+              <select id="regProgram" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan">
+                <option value="B.Eng. Mechatronics Engineering">B.Eng. Mechatronics Engineering</option>
+                <option value="B.Eng. Marine Engineering">B.Eng. Marine Engineering</option>
+                <option value="B.Eng. Electrical & Electronics">B.Eng. Electrical &amp; Electronics</option>
+                <option value="B.Eng. Industrial & Systems">B.Eng. Industrial &amp; Systems</option>
+                <option value="B.Sc. Computer Science / AI">B.Sc. Computer Science / AI</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Year &amp; Branch Role *</label>
+              <input id="regRole" type="text" required placeholder="e.g. Year 3 • Member" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Engineering Skills / Interests (comma-separated)</label>
+            <input id="regSkills" type="text" placeholder="e.g. Embedded Systems, IoT, Python, Circuit Analysis, Robotics" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Member Bio / Current Focus</label>
+            <textarea id="regBio" rows="2" placeholder="Briefly describe your engineering interests or branch role..." class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-ieee-cyan"></textarea>
+          </div>
+
+          <label class="flex items-center gap-3 p-3 rounded-xl bg-navy-950/90 border border-slate-800 cursor-pointer">
+            <input id="regSaveLogin" type="checkbox" checked class="w-4 h-4 accent-ieee-cyan rounded" />
+            <span class="text-xs text-slate-300">
+              <strong>Save login info for future use</strong> (stores credentials locally for 1-click sign-in)
+            </span>
+          </label>
+
+          <button type="submit" class="w-full py-3.5 rounded-xl font-display font-bold text-navy-950 bg-gradient-to-r from-ieee-cyan to-emerald-400 hover:opacity-95 transition flex items-center justify-center gap-2 shadow-lg shadow-ieee-cyan/20">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Register Member, Save Login &amp; Sign In</span>
+          </button>
+        </form>
+
+        <!-- Right: Saved Logins & Active Session Box -->
+        <div class="lg:col-span-5 glass-card rounded-2xl p-6 sm:p-8 space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-700/80 pb-3">
+            <div>
+              <h3 class="font-display font-bold text-lg text-white">Saved Logins &amp; Active Session</h3>
+              <p class="text-xs text-slate-400">Sign in with 1 click using saved credentials</p>
+            </div>
+            <button type="button" onclick="openLoginModal()" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-navy-800 hover:bg-navy-700 text-ieee-cyan border border-ieee-cyan/30">
+              Manual Login
+            </button>
+          </div>
+
+          <div id="activeSessionBox" class="p-4 rounded-xl bg-navy-950 border border-slate-800 text-xs text-slate-400"></div>
+
+          <div class="space-y-2">
+            <div class="text-xs font-mono uppercase text-slate-400">Saved IEEE Accounts on This Device:</div>
+            <div id="savedLoginsContainer" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 05. ACTIVE IEEE MEMBERS DIRECTORY (FOLLOW, FRIEND, DIRECT MESSAGE)    -->
+  <!-- ===================================================================== -->
+  <section id="members" class="py-14 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="space-y-2">
+          <span class="text-xs font-mono uppercase tracking-widest text-ieee-cyan">05 • Member Social Directory</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">Active IEEE Student Branch Members</h2>
+          <p class="text-slate-300 max-w-2xl">
+            Every student who registers above appears here. Members can <strong>Follow</strong> each other, add <strong>Friends</strong>, and open <strong>Direct Messages</strong>.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" onclick="setMemberFilter('all')" id="memFilterAll" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-ieee-cyan text-navy-950 font-semibold">All Members</button>
+          <button type="button" onclick="setMemberFilter('friends')" id="memFilterFriends" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-navy-800 text-slate-300 hover:text-white border border-slate-700">Friends (<span id="countFriends">0</span>)</button>
+          <button type="button" onclick="setMemberFilter('following')" id="memFilterFollowing" class="px-3.5 py-2 rounded-xl text-xs font-mono bg-navy-800 text-slate-300 hover:text-white border border-slate-700">Following (<span id="countFollowing">0</span>)</button>
+          <button type="button" onclick="focusInput('regName')" class="px-4 py-2 rounded-xl text-xs font-mono font-semibold bg-ieee-blue hover:bg-ieee-cyan hover:text-navy-950 text-white transition">
+            + Register Member Above
+          </button>
+        </div>
+      </div>
+
+      <div id="membersGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 06. STUDENT ACHIEVEMENTS & PROJECTS (LEFT: ADD FORM | RIGHT: DISPLAY) -->
+  <!-- ===================================================================== -->
+  <section id="projects" class="py-16 border-b border-slate-800/80 bg-navy-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="space-y-2">
+          <span class="text-xs font-mono uppercase tracking-widest text-amber-400">06 • Student Achievements &amp; Projects Workspace</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">Achievements &amp; Student Projects</h2>
+          <p class="text-slate-300 max-w-2xl">
+            Use the <strong>Add Achievement / Project Form</strong> on the left to enter student names, IEEE numbers, awards, and project details. Added entries appear immediately in the <strong>Achievements Showcase Space</strong> on the right.
+          </p>
+        </div>
+        <button type="button" onclick="focusInput('projTitle')" class="px-4 py-2.5 rounded-xl font-semibold text-xs font-mono bg-amber-400 text-navy-950 hover:bg-amber-300 transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Focus Achievement Form</span>
+        </button>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Left (5 cols): Always-Visible Form to Add Achievement Info -->
+        <div id="projectCreatorCard" class="lg:col-span-5 glass-card rounded-2xl p-6 border-2 border-amber-400/40 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+            <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+              <i class="fa-solid fa-trophy text-amber-400"></i>
+              <span>Add Achievement / Project Info</span>
+            </h3>
+            <span class="text-[11px] font-mono text-amber-300">Live Entry Form</span>
+          </div>
+
+          <form onsubmit="handleAddProject(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Project or Competition Name *</label>
+              <input id="projTitle" type="text" required placeholder="e.g. Smart Tank IoT Telemetry System" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Student Name(s) &amp; IEEE #(s) *</label>
+              <input id="projStudents" type="text" required placeholder="Enter student name(s) who built this project" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Award / Placement *</label>
+                <input id="projAward" type="text" required placeholder="e.g. 1st Place Winner" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" />
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Engineering Domain</label>
+                <select id="projCategory" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+                  <option value="IoT & Embedded Systems">IoT &amp; Embedded Systems</option>
+                  <option value="Mechatronics & Robotics">Mechatronics &amp; Robotics</option>
+                  <option value="AI & Computer Vision">AI &amp; Computer Vision</option>
+                  <option value="Marine & Power Systems">Marine &amp; Power Systems</option>
+                  <option value="IEEE Competition / Paper">IEEE Competition / Paper</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Detailed Project &amp; Achievement Info *</label>
+              <textarea id="projDescription" rows="3" required placeholder="Describe how the project works, the hardware/software used, and the achievement won..." class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Optional Project Photo</label>
+              <input id="projPhoto" type="file" accept="image/*" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 file:mr-3 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:bg-amber-500 file:text-navy-950 file:font-semibold" />
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl font-display font-bold text-sm bg-amber-400 text-navy-950 hover:bg-amber-300 transition flex items-center justify-center gap-2 shadow-lg shadow-amber-400/20">
+              <i class="fa-solid fa-plus-circle"></i>
+              <span>Post to Achievements Showcase</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right (7 cols): Dedicated Achievements Showcase Display Space -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="glass-card rounded-xl px-5 py-3.5 flex items-center justify-between border border-amber-400/30">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+              <h3 class="font-display font-bold text-base text-white">Published Student Achievements &amp; Projects</h3>
+            </div>
+            <span class="text-xs font-mono text-amber-300"><span id="badgeProjectsCount">0</span> Entries</span>
+          </div>
+
+          <div id="projectsGrid" class="grid sm:grid-cols-2 gap-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 07. UPCOMING IEEE & ENGINEERING EVENTS (LEFT: ADD FORM | RIGHT: LIST) -->
+  <!-- ===================================================================== -->
+  <section id="events" class="py-16 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="space-y-2">
+          <span class="text-xs font-mono uppercase tracking-widest text-emerald-400">07 • Upcoming IEEE &amp; Engineering Events Workspace</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">Upcoming IEEE &amp; Regional Engineering Events</h2>
+          <p class="text-slate-300 max-w-2xl">
+            Use the <strong>Add Event Form</strong> on the left to schedule upcoming IEEE branch sessions, Jamaica Section events, workshops, and hackathons. Added events appear immediately in the <strong>Events Calendar Board</strong> on the right.
+          </p>
+        </div>
+        <button type="button" onclick="focusInput('evtTitle')" class="px-4 py-2.5 rounded-xl font-semibold text-xs font-mono bg-emerald-400 text-navy-950 hover:bg-emerald-300 transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-calendar-plus"></i>
+          <span>Focus Event Form</span>
+        </button>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Left (5 cols): Always-Visible Form to Add Event Info -->
+        <div id="eventCreatorCard" class="lg:col-span-5 glass-card rounded-2xl p-6 border-2 border-emerald-400/40 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+            <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-emerald-400"></i>
+              <span>Add Upcoming Event Info</span>
+            </h3>
+            <span class="text-[11px] font-mono text-emerald-300">Live Entry Form</span>
+          </div>
+
+          <form onsubmit="handleAddEvent(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Event Title *</label>
+              <input id="evtTitle" type="text" required placeholder="e.g. CMU IEEE Embedded Systems Workshop" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Event Date *</label>
+                <input id="evtDate" type="date" required class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-emerald-400" />
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Event Time *</label>
+                <input id="evtTime" type="text" required placeholder="e.g. 2:00 PM EST" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-emerald-400" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Venue / Location *</label>
+                <input id="evtLocation" type="text" required placeholder="e.g. CMU FEAT Lab / Kingston" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400" />
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Event Category</label>
+                <select id="evtType" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                  <option value="CMU IEEE Branch">CMU IEEE Branch</option>
+                  <option value="IEEE Jamaica Section">IEEE Jamaica Section</option>
+                  <option value="Hackathon / Competition">Hackathon / Competition</option>
+                  <option value="JIE / Regional Engineering">JIE / Regional Engineering</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Event Description &amp; Agenda *</label>
+              <textarea id="evtSummary" rows="3" required placeholder="Enter event speakers, topics covered, registration info, and requirements..." class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl font-display font-bold text-sm bg-emerald-400 text-navy-950 hover:bg-emerald-300 transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-400/20">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>Publish to Upcoming Events Board</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right (7 cols): Dedicated Upcoming Events Display Space -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="glass-card rounded-xl px-5 py-3.5 flex items-center justify-between border border-emerald-400/30">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              <h3 class="font-display font-bold text-base text-white">Published Upcoming IEEE &amp; Engineering Events</h3>
+            </div>
+            <span class="text-xs font-mono text-emerald-300"><span id="badgeEventsCount">0</span> Scheduled</span>
+          </div>
+
+          <div id="eventsGrid" class="grid sm:grid-cols-2 gap-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 08. ENGINEERING COMMUNITY LOUNGE (LEFT: POST FORM | RIGHT: FEED)      -->
+  <!-- ===================================================================== -->
+  <section id="community" class="py-16 border-b border-slate-800/80 bg-navy-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="space-y-2">
+          <span class="text-xs font-mono uppercase tracking-widest text-ieee-cyan">08 • Student Engineering Discussion Forum</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">Engineering Community Discussion Lounge</h2>
+          <p class="text-slate-300 max-w-2xl">
+            Post engineering questions, circuit design ideas, or code snippets using the <strong>Discussion Composer</strong> on the left, and reply to fellow student members in the <strong>Live Community Feed</strong> on the right.
+          </p>
+        </div>
+        <button type="button" onclick="focusInput('threadTitle')" class="px-4 py-2.5 rounded-xl font-semibold text-xs font-mono bg-ieee-cyan text-navy-950 hover:bg-sky-300 transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-comments"></i>
+          <span>Focus Discussion Form</span>
+        </button>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Left (5 cols): Always-Visible Form to Start Discussion Thread -->
+        <div id="communityCreatorCard" class="lg:col-span-5 glass-card rounded-2xl p-6 border-2 border-ieee-cyan/40 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+            <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+              <i class="fa-solid fa-message text-ieee-cyan"></i>
+              <span>Start an Engineering Discussion</span>
+            </h3>
+            <span id="forumAuthorBadge" class="text-[11px] font-mono text-ieee-cyan">Member Post</span>
+          </div>
+
+          <form onsubmit="handleAddThread(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Your Name / IEEE # (Auto-filled if signed in)</label>
+              <input id="threadAuthorInput" type="text" placeholder="e.g. IEEE Student Member (#99842100)" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-ieee-cyan" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Discussion Topic Title *</label>
+              <input id="threadTitle" type="text" required placeholder="e.g. Best buck converter for 12V to 5V ESP32 node?" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Engineering Channel</label>
+              <select id="threadChannel" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan">
+                <option value="Embedded Systems & IoT">Embedded Systems &amp; IoT</option>
+                <option value="Mechatronics & Robotics">Mechatronics &amp; Robotics</option>
+                <option value="Power Electronics & Circuits">Power Electronics &amp; Circuits</option>
+                <option value="Python, AI & Computer Vision">Python, AI &amp; Computer Vision</option>
+                <option value="CaribCon 2026 & IEEE General">CaribCon 2026 &amp; IEEE General</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Message / Technical Question *</label>
+              <textarea id="threadBody" rows="3" required placeholder="Share your engineering topic, question, or collaboration request..." class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Optional Code / Formula Snippet</label>
+              <input id="threadCode" type="text" placeholder="e.g. P = V * I  or  import cv2" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono text-ieee-cyan focus:outline-none focus:border-ieee-cyan" />
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl font-display font-bold text-sm bg-ieee-cyan text-navy-950 hover:bg-sky-300 transition flex items-center justify-center gap-2 shadow-lg shadow-ieee-cyan/20">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Post to Community Feed</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right (7 cols): Dedicated Community Discussion Feed Space -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="glass-card rounded-xl px-5 py-3.5 flex items-center justify-between border border-ieee-cyan/30">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-ieee-cyan"></span>
+              <h3 class="font-display font-bold text-base text-white">Live Engineering Community Discussions &amp; Replies</h3>
+            </div>
+            <span class="text-xs font-mono text-ieee-cyan"><span id="badgeThreadsCount">0</span> Threads</span>
+          </div>
+
+          <div id="threadsContainer" class="space-y-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- 09. BRANCH ACTIVITIES & PHOTO GALLERY (LEFT: UPLOAD | RIGHT: GALLERY) -->
+  <!-- ===================================================================== -->
+  <section id="gallery" class="py-16 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div class="space-y-2">
+          <span class="text-xs font-mono uppercase tracking-widest text-purple-400">09 • Branch Activities &amp; Photo Gallery Workspace</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white">Branch Activities &amp; Photo Gallery</h2>
+          <p class="text-slate-300 max-w-2xl">
+            Use the <strong>Add Activity &amp; Photo Form</strong> on the left to upload photos from CMU IEEE Student Branch meetings, lab builds, and <strong>IEEE CaribCon 2026</strong>. Added photos appear immediately in the <strong>Photo Gallery Grid</strong> on the right.
+          </p>
+        </div>
+        <button type="button" onclick="focusInput('galTitle')" class="px-4 py-2.5 rounded-xl font-semibold text-xs font-mono bg-purple-400 text-navy-950 hover:bg-purple-300 transition flex items-center gap-2 shrink-0">
+          <i class="fa-solid fa-camera"></i>
+          <span>Focus Photo Upload Form</span>
+        </button>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Left (5 cols): Always-Visible Form to Add Photos & Activity Info -->
+        <div id="galleryCreatorCard" class="lg:col-span-5 glass-card rounded-2xl p-6 border-2 border-purple-400/40 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+            <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+              <i class="fa-solid fa-images text-purple-400"></i>
+              <span>Add Branch Activity &amp; Photo</span>
+            </h3>
+            <span class="text-[11px] font-mono text-purple-300">Live Upload Form</span>
+          </div>
+
+          <form onsubmit="handleAddGalleryItem(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Activity / Photo Title *</label>
+              <input id="galTitle" type="text" required placeholder="e.g. CMU Delegation at IEEE CaribCon 2026" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Category *</label>
+                <select id="galCategory" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400">
+                  <option value="IEEE CaribCon 2026">IEEE CaribCon 2026</option>
+                  <option value="Hardware & Lab Session">Hardware &amp; Lab Session</option>
+                  <option value="Branch Meeting / Workshop">Branch Meeting / Workshop</option>
+                  <option value="Competition & Showcase">Competition &amp; Showcase</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Activity Date</label>
+                <input id="galDate" type="text" placeholder="e.g. October 2026" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Select Photo from Device (JPEG/PNG)</label>
+              <input id="galFile" type="file" accept="image/*" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-300 file:mr-3 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:bg-purple-500 file:text-navy-950 file:font-semibold" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Or Paste Direct Image URL (Optional)</label>
+              <input id="galUrl" type="url" placeholder="https://example.com/photo.jpg" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono text-white focus:outline-none focus:border-purple-400" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono uppercase text-slate-300 mb-1">Activity Story / Caption *</label>
+              <textarea id="galCaption" rows="3" required placeholder="Describe what the CMU IEEE Student Branch did during this activity..." class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-purple-400"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3 rounded-xl font-display font-bold text-sm bg-purple-400 text-navy-950 hover:bg-purple-300 transition flex items-center justify-center gap-2 shadow-lg shadow-purple-400/20">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span>Add Photo &amp; Activity to Gallery</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right (7 cols): Dedicated Photo Gallery Display Space -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="glass-card rounded-xl px-5 py-3.5 flex items-center justify-between border border-purple-400/30">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+              <h3 class="font-display font-bold text-base text-white">Published Branch Activity Photos</h3>
+            </div>
+            <span class="text-xs font-mono text-purple-300"><span id="badgeGalleryCount">0</span> Photos</span>
+          </div>
+
+          <div id="galleryGrid" class="grid sm:grid-cols-2 gap-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-navy-950 border-t border-slate-800/90 text-slate-400 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 shrink-0">
+          <img class="custom-logo-img hidden w-full h-full object-contain drop-shadow" alt="CMU Logo" />
+          <svg class="default-logo-svg w-full h-full drop-shadow"><use href="#cmu-crest-svg"></use></svg>
+        </div>
+        <div>
+          <div class="font-display font-bold text-white">Caribbean Maritime University • IEEE Student Branch</div>
+          <div class="text-xs text-slate-400">Faculty of Engineering and Applied Technology (FEAT) • Palisadoes Park, Kingston, Jamaica</div>
+        </div>
+      </div>
+      <div class="text-xs font-mono text-slate-400 text-center sm:text-right">
+        <div>IEEE Region 9 • Jamaica Section • CaribCon 2026</div>
+        <button type="button" onclick="clearAllPortalData()" class="mt-1 text-rose-400 hover:underline">Reset All Saved Portal Data</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Direct Message Modal -->
+  <div id="dmModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-lg rounded-2xl p-6 space-y-4 border border-ieee-cyan/40">
+      <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+        <div>
+          <span class="text-[10px] font-mono uppercase text-ieee-cyan">Direct IEEE Member Chat</span>
+          <h3 id="dmTargetTitle" class="font-display font-bold text-lg text-white">Member Chat</h3>
+        </div>
+        <button type="button" onclick="closeDmModal()" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="dmMessagesList" class="h-64 overflow-y-auto space-y-2.5 p-3 rounded-xl bg-navy-950 border border-slate-800 text-xs"></div>
+      <form onsubmit="sendDirectMessage(event)" class="flex gap-2">
+        <input id="dmInput" type="text" required placeholder="Write an engineering message..." class="flex-1 bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-ieee-cyan" />
+        <button type="submit" class="px-4 py-2.5 rounded-xl font-semibold bg-ieee-cyan text-navy-950 hover:bg-sky-300 text-xs font-mono">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- IEEE Member Login Modal -->
+  <div id="loginModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-2xl p-6 space-y-5 border border-ieee-cyan/40">
+      <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 shrink-0">
+            <img class="custom-logo-img hidden w-full h-full object-contain" alt="CMU Logo" />
+            <svg class="default-logo-svg w-full h-full"><use href="#cmu-crest-svg"></use></svg>
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-lg text-white">IEEE Member Sign-In</h3>
+            <p class="text-xs text-slate-400">Sign in with your registered IEEE #</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeLoginModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleManualLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono uppercase text-slate-300 mb-1">IEEE Member Number *</label>
+          <input id="loginIeeeNum" type="text" required placeholder="Enter your IEEE Member #" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-mono text-ieee-cyan focus:outline-none focus:border-ieee-cyan" />
+        </div>
+        <div>
+          <label class="block text-xs font-mono uppercase text-slate-300 mb-1">PIN / Password *</label>
+          <input id="loginPin" type="password" required placeholder="Enter PIN/Password" class="w-full bg-navy-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-mono text-white focus:outline-none focus:border-ieee-cyan" />
+        </div>
+        <div id="loginModalError" class="hidden text-xs font-mono text-rose-400"></div>
+        <button type="submit" class="w-full py-3 rounded-xl font-display font-bold bg-ieee-cyan text-navy-950 hover:bg-sky-300 transition">
+          Sign In with IEEE #
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    const KEYS = {
+      MEMBERS: 'cmu_ieee_v2_members',
+      SAVED_LOGINS: 'cmu_ieee_v2_saved_logins',
+      SESSION: 'cmu_ieee_v2_session',
+      PROJECTS: 'cmu_ieee_v2_projects',
+      EVENTS: 'cmu_ieee_v2_events',
+      THREADS: 'cmu_ieee_v2_threads',
+      GALLERY: 'cmu_ieee_v2_gallery',
+      DMS: 'cmu_ieee_v2_dms',
+      CUSTOM_LOGO: 'cmu_ieee_v2_custom_logo'
+    };
+
+    let members = JSON.parse(localStorage.getItem(KEYS.MEMBERS) || '[]');
+    let savedLogins = JSON.parse(localStorage.getItem(KEYS.SAVED_LOGINS) || '[]');
+    let currentUser = JSON.parse(localStorage.getItem(KEYS.SESSION) || 'null');
+    let projects = JSON.parse(localStorage.getItem(KEYS.PROJECTS) || '[]');
+    let events = JSON.parse(localStorage.getItem(KEYS.EVENTS) || '[]');
+    let threads = JSON.parse(localStorage.getItem(KEYS.THREADS) || '[]');
+    let gallery = JSON.parse(localStorage.getItem(KEYS.GALLERY) || '[]');
+    let dms = JSON.parse(localStorage.getItem(KEYS.DMS) || '{}');
+    let memberFilter = 'all';
+    let activeDmMemberId = null;
+
+    // Smoothly scroll to and highlight any form input when a user clicks a quick button
+    function focusInput(inputId) {
+      const el = document.getElementById(inputId);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        el.focus();
+        el.classList.add('highlight-focus');
+        setTimeout(() => el.classList.remove('highlight-focus'), 2400);
+      }, 300);
+    }
+
+    // Apply custom uploaded PNG logo (with white background stripped) if present; otherwise show inline CMU SVG
+    function syncLogos() {
+      const customLogo = localStorage.getItem(KEYS.CUSTOM_LOGO);
+      const customImgs = document.querySelectorAll('.custom-logo-img');
+      const defaultSvgs = document.querySelectorAll('.default-logo-svg');
+
+      if (customLogo) {
+        customImgs.forEach(img => {
+          img.src = customLogo;
+          img.classList.remove('hidden');
+        });
+        defaultSvgs.forEach(svg => svg.classList.add('hidden'));
+      } else {
+        customImgs.forEach(img => img.classList.add('hidden'));
+        defaultSvgs.forEach(svg => svg.classList.remove('hidden'));
+      }
+    }
+
+    // Automatic White-Background Remover for uploaded CMU Logo PNG
+    function handleLogoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imgData.data;
+
+          const w = canvas.width;
+          const h = canvas.height;
+          const visited = new Uint8Array(w * h);
+          const queue = [];
+
+          function isNearWhite(idx) {
+            return data[idx] > 232 && data[idx + 1] > 232 && data[idx + 2] > 232;
+          }
+
+          for (let x = 0; x < w; x++) {
+            queue.push(x, 0);
+            queue.push(x, h - 1);
+          }
+          for (let y = 0; y < h; y++) {
+            queue.push(0, y);
+            queue.push(w - 1, y);
+          }
+
+          while (queue.length > 0) {
+            const y = queue.pop();
+            const x = queue.pop();
+            if (x < 0 || x >= w || y < 0 || y >= h) continue;
+            const pos = y * w + x;
+            if (visited[pos]) continue;
+            visited[pos] = 1;
+            const idx = pos * 4;
+            if (isNearWhite(idx)) {
+              data[idx + 3] = 0;
+              queue.push(x + 1, y, x - 1, y, x, y + 1, x, y - 1);
+            }
+          }
+
+          ctx.putImageData(imgData, 0, 0);
+          localStorage.setItem(KEYS.CUSTOM_LOGO, canvas.toDataURL('image/png'));
+          syncLogos();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Ohm's Law Calculator
+    function loadOhmPreset(v, i, r) {
+      document.getElementById('ohmV').value = v !== null ? v : '';
+      document.getElementById('ohmI').value = i !== null ? i : '';
+      document.getElementById('ohmR').value = r !== null ? r : '';
+      document.getElementById('unitV').value = '1';
+      document.getElementById('unitI').value = '1';
+      document.getElementById('unitR').value = '1';
+      calculateOhmsLaw();
+    }
+
+    function clearOhmInputs() {
+      document.getElementById('ohmV').value = '';
+      document.getElementById('ohmI').value = '';
+      document.getElementById('ohmR').value = '';
+      document.getElementById('outV').textContent = '—';
+      document.getElementById('outI').textContent = '—';
+      document.getElementById('outR').textContent = '—';
+      document.getElementById('outP').textContent = '—';
+      document.getElementById('ohmFormulaReadout').textContent = 'Enter any two values above to compute the third.';
+      document.getElementById('ohmAlert').classList.add('hidden');
+    }
+
+    function showOhmMessage(msg, isError = false) {
+      const box = document.getElementById('ohmAlert');
+      box.classList.remove('hidden');
+      box.className = `p-3.5 rounded-xl text-xs font-mono border ${
+        isError
+          ? 'bg-rose-950/70 border-rose-500/40 text-rose-300'
+          : 'bg-emerald-950/60 border-emerald-500/40 text-emerald-300'
+      }`;
+      box.textContent = msg;
+    }
+
+    function calculateOhmsLaw() {
+      const rawV = document.getElementById('ohmV').value.trim();
+      const rawI = document.getElementById('ohmI').value.trim();
+      const rawR = document.getElementById('ohmR').value.trim();
+
+      const multV = parseFloat(document.getElementById('unitV').value);
+      const multI = parseFloat(document.getElementById('unitI').value);
+      const multR = parseFloat(document.getElementById('unitR').value);
+
+      let hasV = rawV !== '';
+      let hasI = rawI !== '';
+      let hasR = rawR !== '';
+
+      const count = (hasV ? 1 : 0) + (hasI ? 1 : 0) + (hasR ? 1 : 0);
+      if (count < 2) {
+        showOhmMessage('Please enter any TWO values (Voltage, Current, or Resistance) to solve for the third.', true);
+        return;
+      }
+
+      if (count === 3) {
+        hasR = false;
+      }
+
+      let V = hasV ? parseFloat(rawV) * multV : null;
+      let I = hasI ? parseFloat(rawI) * multI : null;
+      let R = hasR ? parseFloat(rawR) * multR : null;
+
+      if ((hasV && V <= 0) || (hasI && I <= 0) || (hasR && R <= 0)) {
+        showOhmMessage('Entered values must be greater than zero.', true);
+        return;
+      }
+
+      let solvedTarget = '';
+      let formulaText = '';
+
+      if (!hasV) {
+        V = I * R;
+        document.getElementById('ohmV').value = +(V / multV).toFixed(4);
+        solvedTarget = 'Solved Voltage (V)';
+        formulaText = `V = I × R = ${I.toFixed(4)} A × ${R.toFixed(2)} Ω = ${V.toFixed(3)} V`;
+      } else if (!hasI) {
+        I = V / R;
+        document.getElementById('ohmI').value = +(I / multI).toFixed(4);
+        solvedTarget = 'Solved Current (I)';
+        formulaText = `I = V / R = ${V.toFixed(3)} V / ${R.toFixed(2)} Ω = ${I.toFixed(4)} A`;
+      } else {
+        R = V / I;
+        document.getElementById('ohmR').value = +(R / multR).toFixed(4);
+        solvedTarget = 'Solved Resistance (R)';
+        formulaText = `R = V / I = ${V.toFixed(3)} V / ${I.toFixed(4)} A = ${R.toFixed(2)} Ω`;
+      }
+
+      const P = V * I;
+      document.getElementById('ohmSolvedBadge').textContent = solvedTarget;
+      document.getElementById('ohmFormulaReadout').textContent = `${formulaText}  |  Power P = ${P.toFixed(3)} W`;
+
+      document.getElementById('outV').textContent = `${V.toFixed(2)} V`;
+      document.getElementById('outI').textContent = I < 1 ? `${(I * 1000).toFixed(1)} mA` : `${I.toFixed(3)} A`;
+      document.getElementById('outR').textContent = R >= 1000 ? `${(R / 1000).toFixed(2)} kΩ` : `${R.toFixed(2)} Ω`;
+      document.getElementById('outP').textContent = `${P.toFixed(2)} W`;
+
+      showOhmMessage(`${solvedTarget}: ${formulaText}`, false);
+
+      document.getElementById('svgLabelV').textContent = `${V.toFixed(1)} V`;
+      document.getElementById('svgLabelI').textContent = `I = ${I.toFixed(3)} A`;
+      document.getElementById('svgLabelR').textContent = R >= 1000 ? `${(R / 1000).toFixed(1)} kΩ` : `${R.toFixed(1)} Ω`;
+      document.getElementById('svgLabelP').textContent = `${P.toFixed(2)} W`;
+
+      const duration = Math.max(0.25, Math.min(3.0, 0.8 / Math.max(I, 0.05)));
+      document.getElementById('svgCurrentLoop').style.setProperty('--flow-duration', `${duration}s`);
+    }
+
+    // Registration & Saved Logins
+    function handleMemberRegistration(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const ieeeNum = document.getElementById('regIeeeNum').value.trim();
+      const pin = document.getElementById('regPin').value.trim();
+      const program = document.getElementById('regProgram').value;
+      const role = document.getElementById('regRole').value.trim();
+      const skillsRaw = document.getElementById('regSkills').value.trim();
+      const bio = document.getElementById('regBio').value.trim();
+      const saveForFuture = document.getElementById('regSaveLogin').checked;
+
+      const skills = skillsRaw
+        ? skillsRaw.split(',').map(s => s.trim()).filter(Boolean)
+        : ['IEEE Student Member'];
+
+      let existingIndex = members.findIndex(m => m.ieeeNum === ieeeNum);
+      const memberObj = {
+        id: existingIndex >= 0 ? members[existingIndex].id : 'mem_' + Date.now(),
+        name,
+        ieeeNum,
+        pin,
+        program,
+        role,
+        skills,
+        bio: bio || 'Active member of the Caribbean Maritime University IEEE Student Branch.',
+        isFollowing: existingIndex >= 0 ? members[existingIndex].isFollowing : false,
+        isFriend: existingIndex >= 0 ? members[existingIndex].isFriend : false
+      };
+
+      if (existingIndex >= 0) {
+        members[existingIndex] = memberObj;
+      } else {
+        members.unshift(memberObj);
+      }
+      localStorage.setItem(KEYS.MEMBERS, JSON.stringify(members));
+
+      if (saveForFuture) {
+        savedLogins = savedLogins.filter(item => item.ieeeNum !== ieeeNum);
+        savedLogins.unshift({ name, ieeeNum, pin, program, role });
+        localStorage.setItem(KEYS.SAVED_LOGINS, JSON.stringify(savedLogins));
+      }
+
+      setActiveUser(memberObj);
+      document.getElementById('memberRegistrationForm').reset();
+      document.getElementById('regSaveLogin').checked = true;
+      renderAll();
+    }
+
+    function setActiveUser(user) {
+      currentUser = user;
+      if (user) {
+        localStorage.setItem(KEYS.SESSION, JSON.stringify(user));
+      } else {
+        localStorage.removeItem(KEYS.SESSION);
+      }
+      renderAuthUI();
+    }
+
+    function quickSavedLogin(ieeeNum) {
+      const saved = savedLogins.find(s => s.ieeeNum === ieeeNum);
+      if (!saved) return;
+      let member = members.find(m => m.ieeeNum === ieeeNum);
+      if (!member) {
+        member = {
+          id: 'mem_' + Date.now(),
+          name: saved.name,
+          ieeeNum: saved.ieeeNum,
+          pin: saved.pin,
+          program: saved.program,
+          role: saved.role,
+          skills: ['IEEE Student Member'],
+          bio: 'Active member of the CMU IEEE Student Branch.',
+          isFollowing: false,
+          isFriend: false
+        };
+        members.unshift(member);
+        localStorage.setItem(KEYS.MEMBERS, JSON.stringify(members));
+      }
+      setActiveUser(member);
+      renderAll();
+    }
+
+    function removeSavedLogin(ieeeNum) {
+      savedLogins = savedLogins.filter(s => s.ieeeNum !== ieeeNum);
+      localStorage.setItem(KEYS.SAVED_LOGINS, JSON.stringify(savedLogins));
+      renderAuthUI();
+    }
+
+    function handleManualLogin(e) {
+      e.preventDefault();
+      const ieeeNum = document.getElementById('loginIeeeNum').value.trim();
+      const pin = document.getElementById('loginPin').value.trim();
+      const errBox = document.getElementById('loginModalError');
+
+      const found = members.find(m => m.ieeeNum === ieeeNum && m.pin === pin) ||
+                    savedLogins.find(s => s.ieeeNum === ieeeNum && s.pin === pin);
+
+      if (!found) {
+        errBox.classList.remove('hidden');
+        errBox.textContent = 'No matching IEEE # and PIN found. Please register your account first in Section 04.';
+        return;
+      }
+
+      errBox.classList.add('hidden');
+      setActiveUser(found);
+      closeLoginModal();
+      renderAll();
+    }
+
+    function renderAuthUI() {
+      const navSlot = document.getElementById('navAuthStatus');
+      const sessionBox = document.getElementById('activeSessionBox');
+      const forumBadge = document.getElementById('forumAuthorBadge');
+      const authorInput = document.getElementById('threadAuthorInput');
+      const savedList = document.getElementById('savedLoginsContainer');
+
+      if (currentUser) {
+        navSlot.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-mono">
+              <i class="fa-solid fa-circle-check mr-1"></i>${currentUser.name} • #${currentUser.ieeeNum}
+            </span>
+            <button type="button" onclick="setActiveUser(null)" class="px-2.5 py-1.5 rounded-lg bg-navy-800 hover:bg-rose-950 text-xs font-mono text-slate-300 hover:text-rose-300 border border-slate-700">
+              Sign Out
+            </button>
+          </div>
+        `;
+        sessionBox.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <div class="text-xs font-mono text-emerald-400 uppercase">Signed In IEEE Member</div>
+              <div class="font-display font-bold text-white text-base">${currentUser.name}</div>
+              <div class="text-xs font-mono text-ieee-cyan">IEEE #${currentUser.ieeeNum} • ${currentUser.role || 'Member'}</div>
+            </div>
+            <button type="button" onclick="setActiveUser(null)" class="px-3 py-1.5 rounded-lg bg-rose-950/60 hover:bg-rose-900 text-rose-300 border border-rose-500/30 text-xs font-mono">
+              Log Out
+            </button>
+          </div>
+        `;
+        forumBadge.textContent = `${currentUser.name} (#${currentUser.ieeeNum})`;
+        if (authorInput && !authorInput.value) {
+          authorInput.value = `${currentUser.name} (IEEE #${currentUser.ieeeNum})`;
+        }
+      } else {
+        navSlot.innerHTML = `
+          <button type="button" onclick="openLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-ieee-blue to-ieee-cyan text-navy-950 hover:opacity-95 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <span>IEEE Login</span>
+          </button>
+        `;
+        sessionBox.innerHTML = `No active member signed in yet. Register on the left or click a saved account below.`;
+        forumBadge.textContent = `Open Posting`;
+      }
+
+      if (savedLogins.length === 0) {
+        savedList.innerHTML = `
+          <div class="p-5 rounded-xl bg-navy-950/60 border border-dashed border-slate-700 text-center space-y-1">
+            <div class="text-xs font-mono text-slate-400">No Saved Logins Yet</div>
+            <p class="text-[11px] text-slate-500">Register with the form on the left to save login info for future sessions.</p>
+          </div>
+        `;
+      } else {
+        savedList.innerHTML = savedLogins.map(item => `
+          <div class="p-3 rounded-xl bg-navy-950 border border-slate-800 flex items-center justify-between gap-3">
+            <div>
+              <div class="font-semibold text-sm text-white">${item.name}</div>
+              <div class="text-xs font-mono text-ieee-cyan">IEEE #${item.ieeeNum} • ${item.program || ''}</div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="quickSavedLogin('${item.ieeeNum}')" class="px-3 py-1.5 rounded-lg bg-ieee-cyan text-navy-950 font-mono text-xs font-bold hover:bg-sky-300 transition">
+                Sign In
+              </button>
+              <button type="button" onclick="removeSavedLogin('${item.ieeeNum}')" class="px-2 py-1.5 rounded-lg bg-navy-800 text-slate-400 hover:text-rose-400 text-xs">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Active Members Social Directory
+    function setMemberFilter(filter) {
+      memberFilter = filter;
+      ['All', 'Friends', 'Following'].forEach(label => {
+        const btn = document.getElementById('memFilter' + label);
+        if (!btn) return;
+        btn.className = label.toLowerCase() === filter
+          ? 'px-3.5 py-2 rounded-xl text-xs font-mono bg-ieee-cyan text-navy-950 font-semibold'
+          : 'px-3.5 py-2 rounded-xl text-xs font-mono bg-navy-800 text-slate-300 hover:text-white border border-slate-700';
+      });
+      renderMembers();
+    }
+
+    function toggleFollowMember(id) {
+      const m = members.find(x => x.id === id);
+      if (!m) return;
+      m.isFollowing = !m.isFollowing;
+      localStorage.setItem(KEYS.MEMBERS, JSON.stringify(members));
+      renderMembers();
+    }
+
+    function toggleFriendMember(id) {
+      const m = members.find(x => x.id === id);
+      if (!m) return;
+      m.isFriend = !m.isFriend;
+      localStorage.setItem(KEYS.MEMBERS, JSON.stringify(members));
+      renderMembers();
+    }
+
+    function openDmModal(id) {
+      const m = members.find(x => x.id === id);
+      if (!m) return;
+      activeDmMemberId = id;
+      document.getElementById('dmTargetTitle').textContent = `${m.name} (IEEE #${m.ieeeNum})`;
+      document.getElementById('dmModal').classList.remove('hidden');
+      renderDmMessages();
+    }
+
+    function closeDmModal() {
+      document.getElementById('dmModal').classList.add('hidden');
+      activeDmMemberId = null;
+    }
+
+    function renderDmMessages() {
+      const box = document.getElementById('dmMessagesList');
+      const list = dms[activeDmMemberId] || [];
+      if (list.length === 0) {
+        box.innerHTML = `<div class="text-slate-500 text-center py-12 font-mono">No messages yet. Start a conversation below!</div>`;
+        return;
+      }
+      box.innerHTML = list.map(msg => `
+        <div class="p-2.5 rounded-xl bg-ieee-blue/35 border border-ieee-cyan/30 ml-6">
+          <div class="flex justify-between text-[10px] font-mono text-ieee-cyan mb-1">
+            <span>${msg.sender}</span>
+            <span>${msg.time}</span>
+          </div>
+          <div class="text-slate-200">${msg.text}</div>
+        </div>
+      `).join('');
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function sendDirectMessage(e) {
+      e.preventDefault();
+      if (!activeDmMemberId) return;
+      const input = document.getElementById('dmInput');
+      const text = input.value.trim();
+      if (!text) return;
+      if (!dms[activeDmMemberId]) dms[activeDmMemberId] = [];
+      const sender = currentUser ? `${currentUser.name} (#${currentUser.ieeeNum})` : 'CMU IEEE Member';
+      dms[activeDmMemberId].push({
+        sender,
+        text,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+      localStorage.setItem(KEYS.DMS, JSON.stringify(dms));
+      input.value = '';
+      renderDmMessages();
+    }
+
+    function renderMembers() {
+      const grid = document.getElementById('membersGrid');
+      document.getElementById('countFriends').textContent = members.filter(m => m.isFriend).length;
+      document.getElementById('countFollowing').textContent = members.filter(m => m.isFollowing).length;
+      document.getElementById('statActiveMembers').textContent = members.length;
+
+      let filtered = members;
+      if (memberFilter === 'friends') filtered = members.filter(m => m.isFriend);
+      if (memberFilter === 'following') filtered = members.filter(m => m.isFollowing);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="sm:col-span-2 lg:col-span-3 glass-card rounded-2xl p-8 text-center space-y-3 border border-dashed border-slate-700">
+            <div class="text-xs font-mono uppercase text-ieee-cyan">Active Member Roster Ready</div>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">
+              Register any student member in <strong>Section 04</strong> above. Their profile card will appear here with <strong>Follow</strong>, <strong>Friend</strong>, and <strong>Message</strong> buttons.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(m => {
+        const initials = m.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+        return `
+          <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-ieee-blue to-ieee-cyan text-navy-950 font-display font-bold text-sm flex items-center justify-center">
+                    ${initials}
+                  </div>
+                  <div>
+                    <h3 class="font-display font-bold text-base text-white">${m.name}</h3>
+                    <div class="text-xs font-mono text-ieee-cyan">IEEE #${m.ieeeNum}</div>
+                    <div class="text-[11px] text-slate-400">${m.program} • ${m.role}</div>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">Active</span>
+              </div>
+              <p class="text-xs text-slate-300">${m.bio}</p>
+              <div class="flex flex-wrap gap-1.5">
+                ${(m.skills || []).map(s => `<span class="px-2 py-0.5 rounded bg-navy-900 border border-slate-700 text-[10px] font-mono text-slate-300">${s}</span>`).join('')}
+              </div>
+            </div>
+            <div class="pt-3 border-t border-slate-800 grid grid-cols-3 gap-2">
+              <button type="button" onclick="toggleFollowMember('${m.id}')" class="py-2 rounded-xl text-xs font-mono font-semibold transition ${m.isFollowing ? 'bg-ieee-cyan text-navy-950' : 'bg-navy-900 hover:bg-navy-800 text-slate-200 border border-slate-700'}">
+                ${m.isFollowing ? 'Following' : '+ Follow'}
+              </button>
+              <button type="button" onclick="toggleFriendMember('${m.id}')" class="py-2 rounded-xl text-xs font-mono font-semibold transition ${m.isFriend ? 'bg-emerald-400 text-navy-950' : 'bg-navy-900 hover:bg-navy-800 text-slate-200 border border-slate-700'}">
+                ${m.isFriend ? 'Friends' : '+ Friend'}
+              </button>
+              <button type="button" onclick="openDmModal('${m.id}')" class="py-2 rounded-xl text-xs font-mono font-semibold bg-ieee-blue/40 hover:bg-ieee-blue text-white border border-ieee-cyan/30 transition">
+                Message
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 06. Achievements & Projects
+    function handleAddProject(e) {
+      e.preventDefault();
+      const title = document.getElementById('projTitle').value.trim();
+      const students = document.getElementById('projStudents').value.trim();
+      const award = document.getElementById('projAward').value.trim();
+      const category = document.getElementById('projCategory').value;
+      const description = document.getElementById('projDescription').value.trim();
+      const photoInput = document.getElementById('projPhoto');
+
+      const saveProj = (imgData) => {
+        projects.unshift({
+          id: 'proj_' + Date.now(),
+          title,
+          students,
+          award,
+          category,
+          description,
+          imgData,
+          createdAt: new Date().toLocaleDateString()
+        });
+        localStorage.setItem(KEYS.PROJECTS, JSON.stringify(projects));
+        e.target.reset();
+        renderProjects();
+      };
+
+      if (photoInput.files && photoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = ev => saveProj(ev.target.result);
+        reader.readAsDataURL(photoInput.files[0]);
+      } else {
+        saveProj('');
+      }
+    }
+
+    function deleteProject(id) {
+      projects = projects.filter(p => p.id !== id);
+      localStorage.setItem(KEYS.PROJECTS, JSON.stringify(projects));
+      renderProjects();
+    }
+
+    function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      document.getElementById('statProjectsCount').textContent = projects.length;
+      document.getElementById('badgeProjectsCount').textContent = projects.length;
+
+      if (projects.length === 0) {
+        grid.innerHTML = `
+          <div class="sm:col-span-2 glass-card rounded-2xl p-10 text-center space-y-3 border-2 border-dashed border-amber-400/30">
+            <div class="w-12 h-12 rounded-full bg-amber-400/15 text-amber-300 flex items-center justify-center mx-auto text-xl">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h4 class="font-display font-bold text-white text-base">Achievements Display Space</h4>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">
+              Fill out the <strong>Add Achievement / Project Info</strong> form on the left and click <em>"Post to Achievements Showcase"</em>. Your student achievements and projects will appear right here.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = projects.map(p => `
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-amber-400/30">
+          <div>
+            ${p.imgData ? `<img src="${p.imgData}" alt="${p.title}" class="w-full h-40 object-cover border-b border-slate-800" />` : ''}
+            <div class="p-5 space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-400/30">${p.award}</span>
+                <button type="button" onclick="deleteProject('${p.id}')" class="text-slate-500 hover:text-rose-400 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+              </div>
+              <h4 class="font-display font-bold text-lg text-white">${p.title}</h4>
+              <div class="text-xs font-mono text-ieee-cyan"><i class="fa-solid fa-user-graduate mr-1.5"></i>${p.students}</div>
+              <p class="text-xs text-slate-300 leading-relaxed">${p.description}</p>
+            </div>
+          </div>
+          <div class="px-5 py-2.5 bg-navy-950/60 border-t border-slate-800 flex justify-between text-[11px] font-mono text-slate-400">
+            <span>${p.category}</span>
+            <span>${p.createdAt || ''}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 07. Upcoming IEEE & Engineering Events
+    function handleAddEvent(e) {
+      e.preventDefault();
+      events.unshift({
+        id: 'evt_' + Date.now(),
+        title: document.getElementById('evtTitle').value.trim(),
+        date: document.getElementById('evtDate').value,
+        time: document.getElementById('evtTime').value.trim(),
+        location: document.getElementById('evtLocation').value.trim(),
+        type: document.getElementById('evtType').value,
+        summary: document.getElementById('evtSummary').value.trim(),
+        rsvps: []
+      });
+      localStorage.setItem(KEYS.EVENTS, JSON.stringify(events));
+      e.target.reset();
+      renderEvents();
+    }
+
+    function toggleEventRsvp(id) {
+      const ev = events.find(x => x.id === id);
+      if (!ev) return;
+      const label = currentUser ? `${currentUser.name} (#${currentUser.ieeeNum})` : 'IEEE Student Member';
+      if (ev.rsvps.includes(label)) {
+        ev.rsvps = ev.rsvps.filter(r => r !== label);
+      } else {
+        ev.rsvps.push(label);
+      }
+      localStorage.setItem(KEYS.EVENTS, JSON.stringify(events));
+      renderEvents();
+    }
+
+    function deleteEvent(id) {
+      events = events.filter(x => x.id !== id);
+      localStorage.setItem(KEYS.EVENTS, JSON.stringify(events));
+      renderEvents();
+    }
+
+    function renderEvents() {
+      const grid = document.getElementById('eventsGrid');
+      document.getElementById('statEventsCount').textContent = events.length;
+      document.getElementById('badgeEventsCount').textContent = events.length;
+
+      if (events.length === 0) {
+        grid.innerHTML = `
+          <div class="sm:col-span-2 glass-card rounded-2xl p-10 text-center space-y-3 border-2 border-dashed border-emerald-400/30">
+            <div class="w-12 h-12 rounded-full bg-emerald-400/15 text-emerald-300 flex items-center justify-center mx-auto text-xl">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <h4 class="font-display font-bold text-white text-base">Upcoming Events Display Space</h4>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">
+              Use the <strong>Add Upcoming Event Info</strong> form on the left and click <em>"Publish to Upcoming Events Board"</em>. Your scheduled IEEE and engineering events will appear here.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = events.map(ev => `
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border border-emerald-400/30">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">${ev.type}</span>
+              <button type="button" onclick="deleteEvent('${ev.id}')" class="text-slate-500 hover:text-rose-400 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+            <h4 class="font-display font-bold text-lg text-white">${ev.title}</h4>
+            <div class="text-xs font-mono text-amber-300">
+              <i class="fa-regular fa-calendar mr-1"></i>${ev.date} • ${ev.time}
+            </div>
+            <div class="text-xs font-mono text-ieee-cyan">
+              <i class="fa-solid fa-location-dot mr-1"></i>${ev.location}
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">${ev.summary}</p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400">${ev.rsvps.length} Going</span>
+            <button type="button" onclick="toggleEventRsvp('${ev.id}')" class="px-3 py-1.5 rounded-lg bg-emerald-400 text-navy-950 font-mono text-xs font-bold hover:bg-emerald-300 transition">
+              RSVP with IEEE #
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 08. Community Lounge
+    function handleAddThread(e) {
+      e.preventDefault();
+      const customAuthor = document.getElementById('threadAuthorInput').value.trim();
+      const author = customAuthor || (currentUser ? `${currentUser.name} (IEEE #${currentUser.ieeeNum})` : 'CMU IEEE Member');
+      threads.unshift({
+        id: 'th_' + Date.now(),
+        title: document.getElementById('threadTitle').value.trim(),
+        channel: document.getElementById('threadChannel').value,
+        body: document.getElementById('threadBody').value.trim(),
+        code: document.getElementById('threadCode').value.trim(),
+        author,
+        time: new Date().toLocaleString(),
+        sparks: 1,
+        replies: []
+      });
+      localStorage.setItem(KEYS.THREADS, JSON.stringify(threads));
+      document.getElementById('threadTitle').value = '';
+      document.getElementById('threadBody').value = '';
+      document.getElementById('threadCode').value = '';
+      renderThreads();
+    }
+
+    function handleAddReply(e, threadId) {
+      e.preventDefault();
+      const input = document.getElementById('replyInput_' + threadId);
+      const text = input.value.trim();
+      if (!text) return;
+      const t = threads.find(x => x.id === threadId);
+      if (!t) return;
+      const author = currentUser ? `${currentUser.name} (#${currentUser.ieeeNum})` : 'CMU IEEE Member';
+      t.replies.push({ author, text });
+      localStorage.setItem(KEYS.THREADS, JSON.stringify(threads));
+      renderThreads();
+    }
+
+    function sparkThread(id) {
+      const t = threads.find(x => x.id === id);
+      if (!t) return;
+      t.sparks += 1;
+      localStorage.setItem(KEYS.THREADS, JSON.stringify(threads));
+      renderThreads();
+    }
+
+    function deleteThread(id) {
+      threads = threads.filter(x => x.id !== id);
+      localStorage.setItem(KEYS.THREADS, JSON.stringify(threads));
+      renderThreads();
+    }
+
+    function renderThreads() {
+      const box = document.getElementById('threadsContainer');
+      document.getElementById('badgeThreadsCount').textContent = threads.length;
+
+      if (threads.length === 0) {
+        box.innerHTML = `
+          <div class="glass-card rounded-2xl p-10 text-center space-y-3 border-2 border-dashed border-ieee-cyan/30">
+            <div class="w-12 h-12 rounded-full bg-ieee-cyan/15 text-ieee-cyan flex items-center justify-center mx-auto text-xl">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <h4 class="font-display font-bold text-white text-base">Community Discussion Feed Space</h4>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">
+              Use the <strong>Start an Engineering Discussion</strong> form on the left and click <em>"Post to Community Feed"</em>. Student discussions and peer replies will appear right here.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      box.innerHTML = threads.map(t => `
+        <div class="glass-card rounded-2xl p-5 space-y-3.5 border border-ieee-cyan/30">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-ieee-blue/40 text-ieee-cyan border border-ieee-cyan/30">${t.channel}</span>
+              <h4 class="font-display font-bold text-lg text-white mt-1">${t.title}</h4>
+              <div class="text-xs font-mono text-slate-400">By ${t.author} • ${t.time}</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="sparkThread('${t.id}')" class="px-3 py-1 rounded-lg bg-navy-900 hover:bg-navy-800 border border-amber-400/30 text-amber-300 text-xs font-mono">
+                ⚡ ${t.sparks}
+              </button>
+              <button type="button" onclick="deleteThread('${t.id}')" class="text-slate-500 hover:text-rose-400 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+          </div>
+          <p class="text-sm text-slate-200 leading-relaxed">${t.body}</p>
+          ${t.code ? `<pre class="p-3 rounded-xl bg-navy-950 border border-slate-800 text-xs font-mono text-ieee-cyan overflow-x-auto">${t.code}</pre>` : ''}
+          <div class="space-y-2 pt-3 border-t border-slate-800">
+            ${t.replies.map(r => `
+              <div class="p-2.5 rounded-xl bg-navy-950/90 border border-slate-800 text-xs">
+                <span class="font-mono text-ieee-cyan font-semibold">${r.author}:</span>
+                <span class="text-slate-300 ml-1">${r.text}</span>
+              </div>
+            `).join('')}
+            <form onsubmit="handleAddReply(event, '${t.id}')" class="flex gap-2 pt-1">
+              <input id="replyInput_${t.id}" type="text" required placeholder="Write a reply to this thread..." class="flex-1 bg-navy-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-ieee-cyan" />
+              <button type="submit" class="px-3.5 py-2 rounded-xl bg-ieee-cyan text-navy-950 font-mono text-xs font-bold">Reply</button>
+            </form>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 09. Branch Activities & Photo Gallery
+    function handleAddGalleryItem(e) {
+      e.preventDefault();
+      const title = document.getElementById('galTitle').value.trim();
+      const category = document.getElementById('galCategory').value;
+      const date = document.getElementById('galDate').value.trim() || 'Oct 2026';
+      const url = document.getElementById('galUrl').value.trim();
+      const caption = document.getElementById('galCaption').value.trim();
+      const fileInput = document.getElementById('galFile');
+
+      const saveItem = (imgSrc) => {
+        gallery.unshift({
+          id: 'gal_' + Date.now(),
+          title,
+          category,
+          date,
+          caption,
+          imgSrc
+        });
+        localStorage.setItem(KEYS.GALLERY, JSON.stringify(gallery));
+        e.target.reset();
+        renderGallery();
+      };
+
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = ev => saveItem(ev.target.result);
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        saveItem(url);
+      }
+    }
+
+    function deleteGalleryItem(id) {
+      gallery = gallery.filter(g => g.id !== id);
+      localStorage.setItem(KEYS.GALLERY, JSON.stringify(gallery));
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('galleryGrid');
+      document.getElementById('statGalleryCount').textContent = gallery.length;
+      document.getElementById('badgeGalleryCount').textContent = gallery.length;
+
+      if (gallery.length === 0) {
+        grid.innerHTML = `
+          <div class="sm:col-span-2 glass-card rounded-2xl p-10 text-center space-y-3 border-2 border-dashed border-purple-400/30">
+            <div class="w-12 h-12 rounded-full bg-purple-400/15 text-purple-300 flex items-center justify-center mx-auto text-xl">
+              <i class="fa-solid fa-images"></i>
+            </div>
+            <h4 class="font-display font-bold text-white text-base">Branch Activity Photo Gallery Space</h4>
+            <p class="text-xs text-slate-400 max-w-md mx-auto">
+              Use the <strong>Add Branch Activity &amp; Photo</strong> form on the left to select a photo from your device (or paste an image URL) and click <em>"Add Photo &amp; Activity to Gallery"</em>.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = gallery.map(g => `
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-purple-400/30">
+          <div>
+            ${g.imgSrc
+              ? `<img src="${g.imgSrc}" alt="${g.title}" class="w-full h-48 object-cover border-b border-slate-800" />`
+              : `<div class="w-full h-40 bg-navy-900 flex flex-col items-center justify-center text-purple-300 font-mono text-xs border-b border-slate-800 gap-2"><i class="fa-solid fa-camera text-2xl"></i><span>${g.category}</span></div>`
+            }
+            <div class="p-5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-purple-500/20 text-purple-300 border border-purple-400/30">${g.category}</span>
+                <button type="button" onclick="deleteGalleryItem('${g.id}')" class="text-slate-500 hover:text-rose-400 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+              </div>
+              <h4 class="font-display font-bold text-base text-white">${g.title}</h4>
+              <div class="text-[11px] font-mono text-slate-400">${g.date}</div>
+              <p class="text-xs text-slate-300 leading-relaxed">${g.caption}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+
+    function clearAllPortalData() {
+      Object.values(KEYS).forEach(k => localStorage.removeItem(k));
+      members = [];
+      savedLogins = [];
+      currentUser = null;
+      projects = [];
+      events = [];
+      threads = [];
+      gallery = [];
+      dms = {};
+      renderAll();
+    }
+
+    function renderAll() {
+      syncLogos();
+      renderAuthUI();
+      renderMembers();
+      renderProjects();
+      renderEvents();
+      renderThreads();
+      renderGallery();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+      loadOhmPreset(12, 0.5, null);
+    });
+  </script>
+</body>
+</html>
