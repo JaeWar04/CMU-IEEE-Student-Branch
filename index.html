@@ -237,10 +237,13 @@
           <span class="hidden md:inline">Upload Logo PNG</span>
           <input id="logoUploadInput" type="file" accept="image/*" class="hidden" onchange="handleLogoUpload(event)" />
         </label>
-
+<button type="button" onclick="exportBakedWebsite()" title="Downloads a new index.html with all your uploaded pictures & info baked in for visitors" class="px-3 py-2 rounded-xl text-xs font-mono font-bold bg-amber-400 hover:bg-amber-300 text-navy-950 transition flex items-center gap-1.5 shadow-lg shadow-amber-400/20">
+  <i class="fa-solid fa-file-export"></i>
+  <span>Save &amp; Export HTML for Visitors</span>
+</button>
         <div id="navAuthStatus">
           <button onclick="openLoginModal()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-ieee-blue to-ieee-cyan text-navy-950 hover:opacity-95 transition flex items-center gap-1.5 shadow-lg shadow-ieee-cyan/20">
-            <i class="fa-solid fa-id-card-clip"></i>
+           <i class="fa-solid fa-id-card-clip"></i>
             <span>IEEE Login</span>
           </button>
         </div>
