@@ -2076,9 +2076,202 @@
       renderGallery();
     }
 
+    /*__BAKED_DATA_START__*/
+    const INITIAL_BAKED_DATA = {
+      members: [],
+      projects: [],
+      events: [],
+      threads: [],
+      gallery: [],
+      customLogo: null
+    };
+    /*__BAKED_DATA_END__*/
+
+    // 1. Merges baked data so every visitor on any device sees your uploaded photos & info
+    function mergeBakedData(localArr, bakedArr, storageKey) {
+      if (!Array.isArray(bakedArr) || bakedArr.length === 0) return localArr;
+      const seen = new Set(localArr.map(item => item.id || item.ieeeNum));
+      let updated = false;
+      bakedArr.forEach(item => {
+        const key = item.id || item.ieeeNum;
+        if (!seen.has(key)) {
+          localArr.push(item);
+          updated = true;
+        }
+      });
+      if (updated) {
+        try { localStorage.setItem(storageKey, JSON.stringify(localArr)); } catch (e) {}
+      }
+      return localArr;
+    }
+
+    members = mergeBakedData(members, INITIAL_BAKED_DATA.members, KEYS.MEMBERS);
+    projects = mergeBakedData(projects, INITIAL_BAKED_DATA.projects, KEYS.PROJECTS);
+    events = mergeBakedData(events, INITIAL_BAKED_DATA.events, KEYS.EVENTS);
+    threads = mergeBakedData(threads, INITIAL_BAKED_DATA.threads, KEYS.THREADS);
+    gallery = mergeBakedData(gallery, INITIAL_BAKED_DATA.gallery, KEYS.GALLERY);
+    if (!localStorage.getItem(KEYS.CUSTOM_LOGO) && INITIAL_BAKED_DATA.customLogo) {
+      try { localStorage.setItem(KEYS.CUSTOM_LOGO, INITIAL_BAKED_DATA.customLogo); } catch (e) {}
+    }
+
+    // 2. Automatically compresses uploaded photos to ~65KB so they never disappear on refresh
+    function compressImageFile(file, maxWidth = 800, quality = 0.72) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            let width = img.width;
+            let height = img.height;
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', quality));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // 3. Upgrades Achievement Photo Upload to auto-compress & persist
+    handleAddProject = async function(e) {
+      e.preventDefault();
+      const title = document.getElementById('projTitle').value.trim();
+      const students = document.getElementById('projStudents').value.trim();
+      const award = document.getElementById('projAward').value.trim();
+      const category = document.getElementById('projCategory').value;
+      const description = document.getElementById('projDescription').value.trim();
+      const photoInput = document.getElementById('projPhoto');
+
+      let imgData = '';
+      if (photoInput && photoInput.files && photoInput.files[0]) {
+        imgData = await compressImageFile(photoInput.files[0], 800, 0.72);
+      }
+
+      projects.unshift({
+        id: 'proj_' + Date.now(),
+        title,
+        students,
+        award,
+        category,
+        description,
+        imgData,
+        createdAt: new Date().toLocaleDateString()
+      });
+
+      try {
+        localStorage.setItem(KEYS.PROJECTS, JSON.stringify(projects));
+        e.target.reset();
+        renderProjects();
+      } catch (err) {
+        alert('Storage limit reached! Click the gold "Save & Export HTML for Visitors" button.');
+      }
+    };
+
+    // 4. Upgrades Gallery Photo Upload to auto-compress & persist
+    handleAddGalleryItem = async function(e) {
+      e.preventDefault();
+      const title = document.getElementById('galTitle').value.trim();
+      const category = document.getElementById('galCategory').value;
+      const dateEl = document.getElementById('galDate');
+      const urlEl = document.getElementById('galUrl');
+      const date = dateEl && dateEl.value.trim() ? dateEl.value.trim() : 'Oct 2026';
+      const url = urlEl ? urlEl.value.trim() : '';
+      const caption = document.getElementById('galCaption').value.trim();
+      const fileInput = document.getElementById('galFile');
+
+      let imgSrc = url;
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        imgSrc = await compressImageFile(fileInput.files[0], 800, 0.72);
+      }
+
+      gallery.unshift({
+        id: 'gal_' + Date.now(),
+        title,
+        category,
+        date,
+        caption,
+        imgSrc
+      });
+
+      try {
+        localStorage.setItem(KEYS.GALLERY, JSON.stringify(gallery));
+        e.target.reset();
+        renderGallery();
+      } catch (err) {
+        alert('Storage limit reached! Click the gold "Save & Export HTML for Visitors" button.');
+      }
+    };
+
+    // 5. Exports a ready-to-publish index.html with all your photos baked inside for visitors
+    function exportBakedWebsite() {
+      const activeLogo = localStorage.getItem(KEYS.CUSTOM_LOGO) || INITIAL_BAKED_DATA.customLogo || null;
+      const payload = {
+        members,
+        projects,
+        events,
+        threads,
+        gallery,
+        customLogo: activeLogo
+      };
+
+      // Temporarily clear rendered grids so images aren't duplicated in the exported file
+      const gGrid = document.getElementById('galleryGrid');
+      const pGrid = document.getElementById('projectsGrid');
+      if (gGrid) gGrid.innerHTML = '';
+      if (pGrid) pGrid.innerHTML = '';
+
+      const startMarker = '/*' + '__BAKED_DATA_START__' + '*/';
+      const endMarker = '/*' + '__BAKED_DATA_END__' + '*/';
+      const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+      // Restore grids immediately on screen
+      renderAll();
+
+      const sIdx = fullHtml.indexOf(startMarker);
+      const eIdx = fullHtml.indexOf(endMarker);
+
+      if (sIdx !== -1 && eIdx !== -1) {
+        const newBlock = `${startMarker}\n    const INITIAL_BAKED_DATA = ${JSON.stringify(payload, null, 2)};\n    ${endMarker}`;
+        const updatedHtml = fullHtml.substring(0, sIdx) + newBlock + fullHtml.substring(eIdx + endMarker.length);
+
+        const blob = new Blob([updatedHtml], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'index.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    // 6. Adds the gold "Save & Export HTML for Visitors" button to your screen
+    function injectVisitorExportBtn() {
+      if (document.getElementById('visitorExportBtn')) return;
+      const btn = document.createElement('button');
+      btn.id = 'visitorExportBtn';
+      btn.type = 'button';
+      btn.onclick = exportBakedWebsite;
+      btn.className = 'fixed bottom-5 right-5 z-50 px-4 py-3 rounded-xl font-mono text-xs font-bold bg-amber-400 hover:bg-amber-300 text-navy-950 shadow-2xl flex items-center gap-2 border-2 border-navy-950 transition cursor-pointer';
+      btn.innerHTML = '<i class="fa-solid fa-file-export"></i> <span>Save &amp; Export HTML for Visitors</span>';
+      document.body.appendChild(btn);
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       renderAll();
       loadOhmPreset(12, 0.5, null);
+      injectVisitorExportBtn();
     });
   </script>
 </body>
